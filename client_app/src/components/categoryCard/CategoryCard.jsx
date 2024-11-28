@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import classes from './CategoryCard.module.css'
 import Button from '../button/Button'
+import { data } from '../../data'
 
 
 const CategoryCard = () => {
@@ -12,14 +13,7 @@ const CategoryCard = () => {
     const [categories, setCategories] = useState([])
 
     useEffect(()=>{
-        axios
-        .get("http://localhost:4000/categories")
-        .then((response)=>{
-            setCategories(response.data.sort((first, second) => first.order - second.order))
-        })
-        .catch((error)=>{
-            console.log(error)
-        })
+        setCategories(data.categories.sort((first, second) => first.order - second.order))
     },[])
 
     console.log(categories)

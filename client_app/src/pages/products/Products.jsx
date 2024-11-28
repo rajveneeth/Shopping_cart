@@ -7,6 +7,7 @@ import Menubar from '../../components/Menubar/Menubar'
 import Dropdown from '../../components/dropdown/Dropdown'
 
 import classes from './Products.module.css'
+import { data } from '../../data'
 
 const Products = ()=>{
 
@@ -20,23 +21,11 @@ const Products = ()=>{
     const productId = searchParams.get("product");
 
     useEffect(()=>{
-        axios
-       .get("http://localhost:4000/products")
-       .then((response) => {
-        setProducts(response.data);
-       })
-       .catch((error) => {
-         console.log(error);
-       });
+      setProducts(data.products);
     },[])
 
     useEffect(() => {
-        axios
-          .get("http://localhost:4000/categories")
-          .then((response) => {
-            setCategories(response.data);
-          })
-          .catch((error) => {});
+       setCategories(data.categories);
     }, []);
 
 console.log(productId)
