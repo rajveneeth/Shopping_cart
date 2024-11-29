@@ -26,7 +26,6 @@ const Home = ()=>{
     return (
         <>
             <main className={classes.home__container}>
-                <h1>Test</h1>
                 <Banners banners={banners}/>
                 <CategoryCard />
             </main>
