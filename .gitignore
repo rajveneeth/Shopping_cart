@@ -1,2 +1,3 @@
 client_app/node_modules
 server/node_modules
+client_app/.env

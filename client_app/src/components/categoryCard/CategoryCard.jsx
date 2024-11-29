@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import {useHistory} from 'react-router-dom'
 import axios from 'axios'
-
+import { env } from '../../env'
 import classes from './CategoryCard.module.css'
 import Button from '../button/Button'
-import { data } from '../../data'
+
 
 
 const CategoryCard = () => {
@@ -13,7 +13,14 @@ const CategoryCard = () => {
     const [categories, setCategories] = useState([])
 
     useEffect(()=>{
-        setCategories(data.categories.sort((first, second) => first.order - second.order))
+        axios
+        .get(`${env.REACT_APP_RUNTIME_URL}/categories`)
+        .then((response)=>{
+            setCategories(response.data.sort((first, second) => first.order - second.order))
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
     },[])
 
     console.log(categories)

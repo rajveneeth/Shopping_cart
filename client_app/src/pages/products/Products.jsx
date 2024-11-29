@@ -1,13 +1,12 @@
 import React, {useState,useEffect} from 'react'
 import axios from 'axios'
 import {useHistory, useLocation} from 'react-router-dom'
-
+import { env } from '../../env'
 import ProductItems from '../../components/ProductItems/ProductItems'
 import Menubar from '../../components/Menubar/Menubar'
 import Dropdown from '../../components/dropdown/Dropdown'
 
 import classes from './Products.module.css'
-import { data } from '../../data'
 
 const Products = ()=>{
 
@@ -21,11 +20,23 @@ const Products = ()=>{
     const productId = searchParams.get("product");
 
     useEffect(()=>{
-      setProducts(data.products);
+        axios
+       .get(`${env.REACT_APP_RUNTIME_URL}/products`)
+       .then((response) => {
+        setProducts(response.data);
+       })
+       .catch((error) => {
+         console.log(error);
+       });
     },[])
 
     useEffect(() => {
-       setCategories(data.categories);
+        axios
+          .get(`${env.REACT_APP_RUNTIME_URL}/categories`)
+          .then((response) => {
+            setCategories(response.data);
+          })
+          .catch((error) => {});
     }, []);
 
 console.log(productId)

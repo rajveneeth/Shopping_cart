@@ -4,7 +4,7 @@ import classes from './Home.module.css'
 
 import Banners from '../../components/banners/Banners'
 import CategoryCard from '../../components/categoryCard/CategoryCard'
-import { data } from '../../data'
+import { env } from '../../env'
 
 const Home = ()=>{
 
@@ -12,7 +12,7 @@ const Home = ()=>{
 
     useEffect(()=>{
         axios
-        .get("http://localhost:4000/banners")
+        .get(`${env.REACT_APP_RUNTIME_URL}/banners`)
         .then((response)=>{
             setBanners(response.data)
         })
@@ -27,7 +27,7 @@ const Home = ()=>{
         <>
             <main className={classes.home__container}>
                 <h1>Test</h1>
-                <Banners banners={data.banners}/>
+                <Banners banners={banners}/>
                 <CategoryCard />
             </main>
 
