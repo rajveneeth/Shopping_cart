@@ -4,6 +4,7 @@ import axios from 'axios'
 import { env } from '../../env'
 import classes from './CategoryCard.module.css'
 import Button from '../button/Button'
+import { data } from '../../data'
 
 
 
@@ -16,7 +17,13 @@ const CategoryCard = () => {
         axios
         .get(`${env.REACT_APP_RUNTIME_URL}/categories`)
         .then((response)=>{
-            setCategories(response.data.sort((first, second) => first.order - second.order))
+            if(response){
+                setCategories(response.data.sort((first, second) => first.order - second.order))
+            }
+            else{
+                setCategories(data.categories.sort((first, second) => first.order - second.order))
+            }
+            
         })
         .catch((error)=>{
             console.log(error)

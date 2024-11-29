@@ -7,6 +7,7 @@ import Menubar from '../../components/Menubar/Menubar'
 import Dropdown from '../../components/dropdown/Dropdown'
 
 import classes from './Products.module.css'
+import { data } from '../../data'
 
 const Products = ()=>{
 
@@ -23,7 +24,13 @@ const Products = ()=>{
         axios
        .get(`${env.REACT_APP_RUNTIME_URL}/products`)
        .then((response) => {
-        setProducts(response.data);
+        if(response){
+            setProducts(response.data);
+        }
+        else {
+            setProducts(data.products);
+        }
+        
        })
        .catch((error) => {
          console.log(error);

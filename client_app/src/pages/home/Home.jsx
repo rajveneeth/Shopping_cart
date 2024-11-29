@@ -5,6 +5,7 @@ import classes from './Home.module.css'
 import Banners from '../../components/banners/Banners'
 import CategoryCard from '../../components/categoryCard/CategoryCard'
 import { env } from '../../env'
+import { data } from '../../data'
 
 const Home = ()=>{
 
@@ -14,7 +15,13 @@ const Home = ()=>{
         axios
         .get(`${env.REACT_APP_RUNTIME_URL}/banners`)
         .then((response)=>{
-            setBanners(response.data)
+            if(response){
+                setBanners(response.data)
+            }
+            else {
+                 setBanners(data.banners)
+            }
+            
         })
         .catch((error)=>{
             console.log(error)
